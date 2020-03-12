@@ -5,12 +5,36 @@ output: html_notebook
 #Foreword
 The code samples taken from the chapters of "ModernDive - Statistical Inference via Data Science" (https://moderndive.com/index.html) are presented below.
 
+#2. Data Visualization
+##Needed Packages
 ```{r}
-plot(cars)
+library(nycflights13)
+library(ggplot2)
+library(dplyr)
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+##2.3 5NG#1: Scatterplots
+```{r warning=FALSE}
+alaska_flights <- flights %>%
+  filter(carrier == "AS")
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay)) +
+  geom_point(alpha = 0.2)
+ggplot(data = alaska_flights, mapping = aes(x = dep_delay, y = arr_delay)) + 
+  geom_jitter(width = 30, height = 30)
+```
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+#2.4 5NG#2: Linegraphs
+```{r}
+early_january_weather <- weather %>%
+  filter(origin == "EWR" & month == 1 & day <= 15)
+
+ggplot(data = early_january_weather, mapping = aes(x = early_january_weather$time_hour, y = early_january_weather$temp)) +
+  geom_line()
+```
+
+##2.5 5NG#3: Histograms
+```{r}
+
+```
+
